@@ -1,0 +1,145 @@
+img {
+  border-radius: 15%;
+  max-height: 40px;   
+}
+
+ion-content {
+  --ion-background-color:#0096FF;
+}
+
+
+.defaultList{
+  background-color:#5faafb;
+}
+ion-refresher{
+  background-color: #0096FF;
+}
+  
+ion-item{
+  font-size: 60px;
+}
+ion-grid{
+  text-align: center;
+}
+
+ion-icon{
+  text-align: center;
+}
+.alertIcon{
+  
+  text-align: center;
+  padding-top: 10px;
+  font-size: 55px;
+}
+.alertName{
+  text-align: center;
+  font-size: 30px;
+  
+}
+.alertList{
+  padding-bottom: 10px;
+  padding-left:10px;
+  padding-right:10px;
+}
+
+.alertContent{
+  --ion-background-color: auto;
+}
+
+.cityName{
+  text-align: center;
+  padding-top: 70px;
+  
+  font-size: 30px;
+}
+.currentTemp{
+  text-align: center;
+  font-size: 60px;
+}
+ion-col{
+  padding: 10px;
+}
+.shortForecast{
+  text-align: center;
+  font-size: 20px;
+}
+
+.showAlert{
+  text-align: center;
+  padding-top: 15px;
+  font-size: 45px;
+}
+.alertbuttoncontent{
+  font-size: 45px;
+  padding-right: 10px;
+  margin-top:auto;
+}
+.detailedForecast{
+  padding: 8px;
+}
+.hourlyForecastLabel{
+  padding: 8px;
+  font-size: 20px;
+}
+
+.hourlyForecast{
+  text-align: center;
+}
+
+.dailyForecastLabel{
+  padding: 8px;
+  font-size: 20px;
+}
+
+.dailyForecast{
+  text-align: center;
+}
+.name{
+  text-align: center;
+}
+.custom-skeleton ion-skeleton-text {
+  line-height: 33px;
+  margin: auto;
+  margin-bottom: 10px;
+}
+.bottomSkeletonText{
+  margin-bottom: 90px;
+}
+.custom-skeleton-bottom ion-skeleton-text{
+line-height: 100px;
+margin: auto;
+margin-bottom: 10px;
+}
+
+.alertTime{
+  font-size: 25px;
+  padding-left: 10px;
+  padding-top: 2px;
+}
+.alertTimeText{
+  font-size: 17px;
+  padding-left: 10px;
+}
+.alertDescription{
+  font-size: 25px;
+  padding-left:10px;
+  padding-top: 15px;
+
+}
+.alertDescriptionText{
+  font-size: 17px;
+  padding-left: 10px;
+}
+.alertInstruction{
+  font-size: 25px;
+  padding-left:10px;
+  padding-top: 15px;
+
+}
+.alertInstructionText{
+  font-size: 17px;
+  padding-left: 10px;
+}
+.refresher{
+  padding-top: 40px;
+}

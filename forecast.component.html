@@ -1,0 +1,105 @@
+<ion-content class="ion-padding">
+  
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <div class="refresher">
+    <ion-refresher-content></ion-refresher-content>
+  </div>
+  </ion-refresher>  
+  
+  <div *ngIf="currentForecast">
+  <div class="cityName"><ion-label>{{cityName}}</ion-label> </div>
+  <div class="currentTemp"><ion-label>{{currentForecast?.temperature}}°F</ion-label></div>
+  <ion-grid>
+  <ion-col>Low: {{minTemp  | number: '1.0-0'}}</ion-col>
+  <ion-col>High: {{maxTemp  | number: '1.0-0'}}</ion-col>
+ </ion-grid>
+  <div class="shortForecast"><ion-label>{{currentForecast?.shortForecast}}</ion-label></div>
+</div>
+<div *ngIf="!isOnline">
+  <ion-card>
+    <ion-card-header>
+      
+      <ion-card-title><ion-icon name="cloud-offline-outline"></ion-icon> Can't get weather</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      No internet detected. Check your connection, then try again. 
+      Last updated: <div *ngIf="!lastUpdatedTime">never</div>{{lastUpdatedTime | date: 'short'}}
+    </ion-card-content>
+  </ion-card>
+</div>
+
+<div *ngIf="!currentForecast"  class="ion-padding custom-skeleton">
+  <div class="cityName"><ion-label><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></ion-label> </div>
+  <div class="currentTemp"><ion-label></ion-label><ion-skeleton-text animated style="width: 40%"></ion-skeleton-text></div>
+  <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+  <div class="shortForecast"><ion-label><ion-skeleton-text animated style="width: 40%"></ion-skeleton-text></ion-label></div>
+</div>
+  <div *ngIf="alertProperties">  
+    
+     
+      <div class="showAlert"><ion-button color="warning" id="open-modal"><div class="alertbuttoncontent"><ion-icon name="warning-outline"></ion-icon></div> View Weather Alert</ion-button></div>
+      <ion-modal #modal trigger="open-modal" [presentingElement]="presentingElement">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-title>Weather Alert</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="modal.dismiss()">Close</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          
+          <ion-content class="alertContent">
+         <div class="alertIcon"><ion-icon name="warning-outline"></ion-icon></div> 
+        <div class="alertName"> <ion-label>{{alertProperties?.event}}</ion-label></div>
+        <ion-list inset="true" class="alertList">
+        <ion-row><ion-label class="alertTime">Alert in Effect</ion-label><ion-label class="alertTimeText">From {{alertProperties?.effective | date:"h:mm a z, MMM d"}}, To {{alertProperties?.ends | date:"h:mm a z, MMM d"}}</ion-label></ion-row>
+        <ion-row><ion-label class="alertDescription">Description</ion-label><ion-label class="alertDescriptionText">{{alertProperties?.description}}</ion-label></ion-row>
+        <ion-row><ion-label class="alertInstruction">Instruction</ion-label><ion-label class="alertInstructionText">{{alertProperties?.instruction}}</ion-label></ion-row>
+        </ion-list>
+          </ion-content>
+        </ng-template>
+      </ion-modal>  
+  </div>
+  <div *ngIf="currentForecast">
+  <ion-list inset="true" class="defaultList">
+  <div class="detailedForecast"><ion-row><div *ngIf="!newLength"><div *ngIf="!showMore">{{lengthDetailForecast | slice:0:90}}...</div><div *ngIf="showMore">{{lengthDetailForecast}}</div><ion-button color="dark" size="small" fill="outline" (click)="showMoreClick()">Show {{showMore ? "Less" : "More"}}</ion-button></div><div *ngIf="newLength">{{lengthDetailForecast}}</div></ion-row>
+  </div>
+  </ion-list> 
+  <ion-list inset="true" class="defaultList">
+    <div class="hourlyForecastLabel">
+      <ion-label><ion-icon name="time-outline"></ion-icon> Hourly Forecast</ion-label></div>
+    <div class="hourlyForecast">
+  
+    <ion-row *ngFor="let forecast of hourlyForecast">
+    <ion-col>{{forecast.startTime| date:"h a"}}</ion-col>
+    <ion-col><img src="{{forecast.icon}}" /></ion-col>
+    <ion-col>{{forecast.temperature}}°F</ion-col>
+   <!-- <ion-col><ion-icon name="rainy-outline"></ion-icon>{{forecast.chanceOfPrecipitation}}</ion-col>-->
+  </ion-row>
+  </div>
+  </ion-list>
+
+  <ion-list inset="true" class="defaultList">
+  <div class="dailyForecastLabel">
+    <ion-label><ion-icon name="calendar-outline"></ion-icon> 7 Day Forecast</ion-label>
+  </div>
+  <div class="dailyForecast">
+  <ion-row *ngFor="let dayForecast of dailyForecastsDay">
+    <ion-col>{{dayForecast.startTime| date:"E"}}</ion-col>
+    <ion-col><img src="{{dayForecast.icon}}" /></ion-col>
+    <ion-col>{{dayForecast.temperature}}°F</ion-col>
+  </ion-row>
+  </div>
+</ion-list>
+</div>
+<div *ngIf="!currentForecast"  class="ion-padding custom-skeleton-bottom">
+  <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+  <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+  <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+</div>
+
+<div class="name"><ion-label>Made by Colin H</ion-label></div>
+
+</ion-content>
